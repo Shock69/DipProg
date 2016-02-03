@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FileHelpers;
 using System.Data;
+using System.Linq;
 
 namespace DipProg
 {
@@ -10,6 +11,7 @@ namespace DipProg
     {
         private List<Description> m_Descriptions;
         private DataTable m_Data;
+        private DataTable m_FuzzyData;
 
         public Form1()
         {
@@ -40,7 +42,20 @@ namespace DipProg
         private void fuzzificationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Fuzzification fuzzification = new Fuzzification(m_Descriptions, m_Data);
-            fuzzification.Calculate();
+            m_FuzzyData = fuzzification.Calculate();
+            dataGridView2.AutoGenerateColumns = true;
+            dataGridView2.DataSource = m_FuzzyData;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void shuffleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView2.DataSource = m_FuzzyData.Rows.OfType<DataRow>().Shuffle(new Random()).CopyToDataTable();
+            dataGridView2.Update();
         }
     }
 }
