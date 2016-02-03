@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Fields>
+  <Field tableName="Field_0" name="buying">
+    <values>
+      <value>vhigh</value>
+      <value>high</value>
+      <value>med</value>
+      <value>low</value>  
+    </values>
+  </Field>
+  <Field tableName="Field_1" name="maint">
+    <values>
+      <value>vhigh</value>
+      <value>high</value>
+      <value>med</value>
+      <value>low</value>  
+    </values>
+  </Field>
+  <Field tableName="Field_2" name="doors">
+    <values>
+      <value>2</value>
+      <value>3</value>
+      <value>4</value>
+      <value>5more</value>  
+    </values>
+  </Field>
+  <Field tableName="Field_3" name="persons">
+    <values>
+      <value>2</value>
+      <value>4</value>
+      <value>more</value>
+    </values>
+  </Field>
+  <Field tableName="Field_4" name="lug_boot">
+    <values>
+      <value>small</value>
+      <value>med</value>
+      <value>big</value>  
+    </values>
+  </Field>
+  <Field tableName="Field_5" name="safety">
+    <values>
+      <value>low</value>  
+      <value>med</value>
+      <value>high</value>
+    </values>
+  </Field>
+  <Field tableName="Field_6" name="class" nouse="true">
+    <values>
+      <value>unacc</value>
+      <value>acc</value>
+      <value>good</value>
+      <value>vgood</value>  
+    </values>
+  </Field>
+</Fields>
