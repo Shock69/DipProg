@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClusterCentroid.cs" />
+    <Compile Include="ClusterPoint.cs" />
+    <Compile Include="CMeansAlgorithm.cs" />
     <Compile Include="Description.cs" />
     <Compile Include="DescriptionReader.cs" />
     <Compile Include="Ext.cs" />

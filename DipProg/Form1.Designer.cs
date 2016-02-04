@@ -31,11 +31,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fuzzificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.shuffleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fuzzificationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.shuffleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.split3070ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -49,8 +52,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.fuzzificationToolStripMenuItem,
-            this.shuffleToolStripMenuItem});
+            this.actionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1003, 24);
@@ -71,13 +73,6 @@
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
-            // 
-            // fuzzificationToolStripMenuItem
-            // 
-            this.fuzzificationToolStripMenuItem.Name = "fuzzificationToolStripMenuItem";
-            this.fuzzificationToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
-            this.fuzzificationToolStripMenuItem.Text = "Fuzzification";
-            this.fuzzificationToolStripMenuItem.Click += new System.EventHandler(this.fuzzificationToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -114,12 +109,44 @@
             this.dataGridView2.Size = new System.Drawing.Size(359, 352);
             this.dataGridView2.TabIndex = 3;
             // 
-            // shuffleToolStripMenuItem
+            // actionToolStripMenuItem
             // 
-            this.shuffleToolStripMenuItem.Name = "shuffleToolStripMenuItem";
-            this.shuffleToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.shuffleToolStripMenuItem.Text = "Shuffle";
-            this.shuffleToolStripMenuItem.Click += new System.EventHandler(this.shuffleToolStripMenuItem_Click);
+            this.actionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fuzzificationToolStripMenuItem1,
+            this.shuffleToolStripMenuItem1,
+            this.split3070ToolStripMenuItem,
+            this.cToolStripMenuItem});
+            this.actionToolStripMenuItem.Name = "actionToolStripMenuItem";
+            this.actionToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.actionToolStripMenuItem.Text = "Action";
+            // 
+            // fuzzificationToolStripMenuItem1
+            // 
+            this.fuzzificationToolStripMenuItem1.Name = "fuzzificationToolStripMenuItem1";
+            this.fuzzificationToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.fuzzificationToolStripMenuItem1.Text = "Fuzzification";
+            this.fuzzificationToolStripMenuItem1.Click += new System.EventHandler(this.fuzzificationToolStripMenuItem1_Click);
+            // 
+            // shuffleToolStripMenuItem1
+            // 
+            this.shuffleToolStripMenuItem1.Name = "shuffleToolStripMenuItem1";
+            this.shuffleToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.shuffleToolStripMenuItem1.Text = "Shuffle";
+            this.shuffleToolStripMenuItem1.Click += new System.EventHandler(this.shuffleToolStripMenuItem1_Click);
+            // 
+            // split3070ToolStripMenuItem
+            // 
+            this.split3070ToolStripMenuItem.Name = "split3070ToolStripMenuItem";
+            this.split3070ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.split3070ToolStripMenuItem.Text = "Split 30/70";
+            this.split3070ToolStripMenuItem.Click += new System.EventHandler(this.split3070ToolStripMenuItem_Click);
+            // 
+            // cToolStripMenuItem
+            // 
+            this.cToolStripMenuItem.Name = "cToolStripMenuItem";
+            this.cToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cToolStripMenuItem.Text = "FCM";
+            this.cToolStripMenuItem.Click += new System.EventHandler(this.cToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -131,7 +158,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -150,11 +176,14 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fuzzificationToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.ToolStripMenuItem shuffleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fuzzificationToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem shuffleToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem split3070ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cToolStripMenuItem;
     }
 }
 
