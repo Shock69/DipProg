@@ -5,6 +5,8 @@ using FileHelpers;
 using System.Data;
 using System.Linq;
 using FCM;
+using System.Text;
+using System.Globalization;
 
 namespace DipProg
 {
@@ -39,6 +41,10 @@ namespace DipProg
 
                 dataGridView1.DataSource = m_Data;
                 dataGridView1.AutoGenerateColumns = true;
+
+                m_FuzzyData = m_Data.Copy();
+                dataGridView2.AutoGenerateColumns = true;
+                dataGridView2.DataSource = m_FuzzyData;
             }
         }
 
@@ -52,8 +58,11 @@ namespace DipProg
 
         private void shuffleToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            dataGridView2.DataSource = m_FuzzyData.Rows.OfType<DataRow>().Shuffle(new Random()).CopyToDataTable();
+            DataTable tempDt = m_FuzzyData.Rows.OfType<DataRow>().Shuffle(new Random()).CopyToDataTable();
+            m_FuzzyData = tempDt.AsEnumerable().CopyToDataTable();
+            dataGridView2.DataSource = m_FuzzyData;
             dataGridView2.Update();
+            m_LearningSample = m_FuzzyData.AsEnumerable().CopyToDataTable();
         }
 
         private void split3070ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,40 +82,60 @@ namespace DipProg
 
             foreach (DataRow row in m_LearningSample.Rows)
             {
+                string tag = "";
                 List<double> data = new List<double>();
                 for(int colNum = 0; colNum<m_LearningSample.Columns.Count; colNum++)
                 {
                     if (!m_Descriptions[colNum].IsNotUse)
                     {
-                        data.Add(Convert.ToDouble(row.Field<string>(colNum)));
+                        data.Add(double.Parse(row.Field<string>(colNum), CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        tag = row.Field<string>(colNum);
                     }
                 }
-                points.Add(new ClusterPoint(data));
+                points.Add(new ClusterPoint(data, tag));
             }
 
-            for (int rowNum = 0; rowNum < m_LearningSample.Columns.Count; rowNum++)
+            Random rnd = new Random();
+            for (int centroidNum = 0; centroidNum < 10; centroidNum++)
             {
-                Random rnd = new Random();
                 List<double> data = new List<double>();
                 for (int colNum = 0; colNum < m_LearningSample.Columns.Count; colNum++)
                 {
-                    data.Add(rnd.NextDouble());
+                    if (!m_Descriptions[colNum].IsNotUse)
+                    {
+                        data.Add(0.0/*rnd.NextDouble()*/);
+                    }
                 }
                 centroids.Add(new ClusterCentroid(data));
             }
 
-                CMeansAlgorithm alg = new CMeansAlgorithm(points, centroids, 2);
+            CMeansAlgorithm alg = new CMeansAlgorithm(points, centroids, 2);
             int iterations = alg.Run(Math.Pow(10, -5));
 
             double[,] matrix = alg.U;
 
             for (int j = 0; j < points.Count; j++)
             {
+                double max = -1.0;
+                string output = string.Empty;
                 for (int i = 0; i < centroids.Count; i++)
                 {
-                    ClusterPoint p = points[j];
-                    Console.WriteLine("{0:00} Point: ({1};{2}) ClusterIndex: {3} Value: {4:0.000}", j + 1, p.Data[0], p.Data[1], p.ClusterIndex, matrix[j, i]);
+                    if(max < matrix[j, i])
+                    {
+                        ClusterPoint p = points[j];
+                        StringBuilder sb = new StringBuilder();
+                        for (int k = 0; k < p.Data.Count; k++)
+                        {
+                            sb.AppendFormat("{0}; ", p.Data[k]);
+                        }
+                        max = matrix[j, i];
+                        output = string.Format("{0:00} Point: ({1}) ClusterIndex: {2} Value: {3} Class {4}", j + 1, sb, p.ClusterIndex, matrix[j, i], p.Tag);                        
+                    }
                 }
+                Console.WriteLine(output);
             }
 
             Console.WriteLine();

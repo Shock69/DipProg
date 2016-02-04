@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Fields>
+  <Field tableName="Field_0" name="buying">
+    <values>
+      <value>vhigh</value>
+    </values>
+  </Field>
+  <Field tableName="Field_1" name="maint">
+    <values>
+      <value>vhigh</value>
+    </values>
+  </Field>
+  <Field tableName="Field_2" name="doors">
+    <values>
+      <value>2</value> 
+    </values>
+  </Field>
+  <Field tableName="Field_3" name="persons">
+    <values>
+      <value>more</value>
+    </values>
+  </Field>
+  <Field tableName="Field_4" name="class" nouse="true">
+    <values>
+      <value>Iris-setosa</value>
+      <value>Iris-versicolor</value>
+      <value>Iris-virginica</value> 
+    </values>
+  </Field>
+</Fields>

@@ -67,6 +67,7 @@ namespace FCM
 
             m_Fuzzyness = fuzzy;
 
+            Random rnd = new Random();
             // Iterate through all points to create initial U matrix
             for (int i = 0; i < m_Points.Count; i++)
             {
@@ -76,25 +77,25 @@ namespace FCM
                 for (int j = 0; j < m_Clusters.Count; j++)
                 {
                     ClusterCentroid c = m_Clusters[j];
-                    var diff = CalculateEulerDistance(p, c);
-                    U[i, j] = (diff == 0) ? m_Eps : diff;
+                    var diff = rnd.NextDouble();//CalculateEulerDistance(p, c);
+                    U[i, j] = /*(diff == 0) ? m_Eps : */diff;
                     sum += U[i, j];
                 }
 
-                double sum2 = 0.0;
-                for (int j = 0; j < m_Clusters.Count; j++)
-                {
-                    U[i, j] = 1.0 / Math.Pow(U[i, j] / sum, 2.0 / (m_Fuzzyness - 1.0));
-                    sum2 += U[i, j];
-                }
+                //double sum2 = 0.0;
+                //for (int j = 0; j < m_Clusters.Count; j++)
+                //{
+                //    U[i, j] = 1.0 / Math.Pow(U[i, j] / sum, 2.0 / (m_Fuzzyness - 1.0));
+                //    sum2 += U[i, j];
+                //}
 
                 for (int j = 0; j < m_Clusters.Count; j++)
                 {
-                    U[i, j] = U[i, j] / sum2;
+                    U[i, j] = U[i, j] / sum;
                 }
             }
 
-            RecalculateClusterIndexes();
+            //RecalculateClusterIndexes();
         }
 
         ///
@@ -128,14 +129,14 @@ namespace FCM
                 for (int h = 0; h < m_Points.Count; h++)
                 {
                     double top = CalculateEulerDistance(m_Points[h], m_Clusters[c]);
-                    if (top < 1.0) top = m_Eps;
+                    //if (top < 1.0) top = m_Eps;
 
                     // Bottom is the sum of distances from this data point to all clusters.
                     double sumTerms = 0.0;
                     for (int ck = 0; ck < m_Clusters.Count; ck++)
                     {
                         double thisDistance = CalculateEulerDistance(m_Points[h], m_Clusters[ck]);
-                        if (thisDistance < 1.0) thisDistance = m_Eps;
+                        //if (thisDistance < 1.0) thisDistance = m_Eps;
                         sumTerms += Math.Pow(top / thisDistance, 2.0 / (m_Fuzzyness - 1.0));
                     }
 
@@ -203,7 +204,7 @@ namespace FCM
                     double uu = Math.Pow(U[i, j], m_Fuzzyness);
                     for(int k = 0; k < c.Data.Count; k++)
                     {
-                        uData[k] += uu * c.Data[k];
+                        uData[k] += uu * p.Data[k];
                     }
                     l += uu;
                 }
@@ -226,15 +227,15 @@ namespace FCM
         public int Run(double accuracy)
         {
             int i = 0;
-            int maxIterations = 20;
+            int maxIterations = 2000;
             do
             {
                 i++;
-                J = CalculateObjectiveFunction();
                 CalculateClusterCenters();
                 Step();
                 double jnew = CalculateObjectiveFunction();
-                if (Math.Abs(J - jnew) < accuracy) break;
+                if (i > 1 && Math.Abs(J - jnew) < accuracy) break;
+                J = jnew;
             }
             while (maxIterations > i);
             return i;
